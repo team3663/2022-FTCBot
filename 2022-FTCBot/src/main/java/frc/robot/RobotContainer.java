@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.C_Drive;
 import frc.robot.subsystems.SS_TankDrive;
@@ -28,7 +29,10 @@ import frc.robot.util.XboxGamepad;
 public class RobotContainer {
   
   public static final XboxGamepad DRIVE_CONTROLLER = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
-  private SS_TankDrive ss_TankDrive = new SS_TankDrive();
+
+  // Subsystem
+  private SS_TankDrive driveBase = new SS_TankDrive();
+  
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -37,9 +41,9 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    //CommandScheduler.getInstance().setDefaultCommand(drivebase, new C_Drive());
-    CommandScheduler.getInstance().setDefaultCommand(ss_TankDrive, new C_Drive());
-    //updateManager.startLoop(5.0e-3);
+
+    Command cmd = new C_Drive(driveBase);
+    driveBase.setDefaultCommand(cmd);
   }
 
   /**

@@ -6,19 +6,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.SS_TankDrive;
 
 public class C_Drive extends CommandBase {
   /** Creates a new C_Drive. */
-  private SS_TankDrive ss_TankDrive = SS_TankDrive.getInstance();
+  private SS_TankDrive driveBase;
 
   private static final XboxController driveController = new XboxController(0);
   
   /** Creates a new C_FTC. */
-  public C_Drive() {
-    addRequirements(ss_TankDrive);
-    // Use addRequirements() here to declare subsystem dependencies.
+  public C_Drive( SS_TankDrive driveBase) {
+    this.driveBase = driveBase;
+
+    addRequirements(driveBase);
+  
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +32,7 @@ public class C_Drive extends CommandBase {
     // if(driveController.getYButtonPressed()){
     //   ss_TankDrive.setPower(0.2, 0.2);
     // }
-    ss_TankDrive.setPower(0.2, 0.2);
+    driveBase.setPower(0.2, 0.2);
   }
 
   // Called once the command ends or is interrupted.
