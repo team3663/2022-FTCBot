@@ -4,11 +4,20 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.SS_TankDrive;
 
 public class C_Drive extends CommandBase {
   /** Creates a new C_Drive. */
+  private SS_TankDrive ss_TankDrive = SS_TankDrive.getInstance();
+
+  private static final XboxController driveController = new XboxController(0);
+  
+  /** Creates a new C_FTC. */
   public C_Drive() {
+    addRequirements(ss_TankDrive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -18,7 +27,12 @@ public class C_Drive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    // if(driveController.getYButtonPressed()){
+    //   ss_TankDrive.setPower(0.2, 0.2);
+    // }
+    ss_TankDrive.setPower(0.2, 0.2);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -14,6 +14,6 @@ package frc.robot;
  */
 public final class Constants {
     public static final int LEFT_DRIVE = 3;
-    public static final int RIGTH_DRIVE = 4;
+    public static final int RIGHT_DRIVE = 4;
     public static final int Xbox_Driver_Controller = 0;
 }

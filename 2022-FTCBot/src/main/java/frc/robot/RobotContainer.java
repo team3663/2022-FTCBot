@@ -50,9 +50,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Back button zeros the gyroscope
-    new Button(DRIVE_CONTROLLER::getBackButton)
+    //new Button(DRIVE_CONTROLLER::getBackButton)
     // No requirements because we don't need to interrupt anything
-    .whenPressed(m_drivetrainSubsystem::zeroGyroscope);
+    ////.whenPressed(m_drivetrainSubsystem::zeroGyroscope);
   }
 
   /**
