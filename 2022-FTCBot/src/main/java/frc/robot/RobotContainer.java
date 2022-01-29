@@ -28,22 +28,23 @@ import frc.robot.util.XboxGamepad;
  */
 public class RobotContainer {
   
-  public static final XboxGamepad DRIVE_CONTROLLER = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
-
-  // Subsystem
-  private SS_TankDrive driveBase = new SS_TankDrive();
-  
+  public static XboxGamepad driverController = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private SS_TankDrive driveBase = new SS_TankDrive();
+  private Command cmd = new C_Drive(driveBase, 
+                            () -> driverController.getRawAxis(1), 
+                            () -> driverController.getRawAxis(4)
+                        );
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
-    Command cmd = new C_Drive(driveBase);
+    
     driveBase.setDefaultCommand(cmd);
+    
+    // Configure the button bindings
+    configureButtonBindings();
   }
 
   /**
@@ -52,12 +53,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    // Back button zeros the gyroscope
-    //new Button(DRIVE_CONTROLLER::getBackButton)
-    // No requirements because we don't need to interrupt anything
-    ////.whenPressed(m_drivetrainSubsystem::zeroGyroscope);
-  }
+  private void configureButtonBindings() {}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -67,9 +63,5 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return null;
-  }
-
-  public static XboxGamepad getXboxController() {
-     return DRIVE_CONTROLLER;
   }
 }

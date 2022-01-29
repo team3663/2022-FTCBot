@@ -4,20 +4,25 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
+import java.util.function.Supplier;
+
+// import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SS_TankDrive;
 
 public class C_Drive extends CommandBase {
   /** Creates a new C_Drive. */
   private SS_TankDrive driveBase;
+  private Supplier<Double> leftYAxisSpeedSupplier;
+  private Supplier<Double> rightZAxisRotateSupplier;
 
-  private static final XboxController driveController = new XboxController(0);
-  
   /** Creates a new C_FTC. */
-  public C_Drive( SS_TankDrive driveBase) {
+  public C_Drive(SS_TankDrive driveBase,
+                Supplier<Double> leftYAxisSpeedSupplier,
+                Supplier<Double> rightZAxisRotateSupplier) {
     this.driveBase = driveBase;
-
+    this.leftYAxisSpeedSupplier = leftYAxisSpeedSupplier;
+    this.rightZAxisRotateSupplier = rightZAxisRotateSupplier;
     addRequirements(driveBase);
   
   }
@@ -32,7 +37,8 @@ public class C_Drive extends CommandBase {
     // if(driveController.getYButtonPressed()){
     //   ss_TankDrive.setPower(0.2, 0.2);
     // }
-    driveBase.setPower(0.2, 0.2);
+    // driveBase.setPower(0.2, 0.2);
+    driveBase.arcadeDrive(leftYAxisSpeedSupplier.get(), rightZAxisRotateSupplier.get());
   }
 
   // Called once the command ends or is interrupted.
