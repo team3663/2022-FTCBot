@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.util.TalonSRXController;
+import frc.robot.utils.TalonSRXController;
 
 public class SS_TankDrive extends SubsystemBase {
   // Set up the drive motor controlles
@@ -21,8 +21,8 @@ public class SS_TankDrive extends SubsystemBase {
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftDriveMotor, m_rightDriveMotor);
 
   // set up the encoders for the drive motor controllers  
-  // private Encoder m_leftDriveEncoder = new Encoder(1, 2);  // FIXME: need actual encoder parameters
-  // private Encoder m_rightDriveEncoder = new Encoder(3, 4); // FIXME: need actual encoder parameters
+  // private final Encoder m_leftDriveEncoder = new Encoder(1, 2);  // FIXME: need actual encoder parameters
+  // private final Encoder m_rightDriveEncoder = new Encoder(3, 4); // FIXME: need actual encoder parameters
 
   /** Creates a new SS_FTC. */
   public SS_TankDrive() {

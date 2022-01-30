@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.C_Drive;
 import frc.robot.subsystems.SS_TankDrive;
-import frc.robot.util.XboxGamepad;
+import frc.robot.utils.XboxGamepad;
 
 // import edu.wpi.first.wpilibj.GenericHID;
 // import edu.wpi.first.wpilibj.XboxController;
@@ -27,8 +27,8 @@ import frc.robot.util.XboxGamepad;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
-  public static XboxGamepad driverController = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
+  // Setup Driver Controller
+  public static XboxGamepad driverController = new XboxGamepad(Constants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();

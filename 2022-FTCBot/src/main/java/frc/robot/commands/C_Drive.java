@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SS_TankDrive;
 
 public class C_Drive extends CommandBase {
-  /** Creates a new C_Drive. */
-  private SS_TankDrive driveBase;
+
+  private final SS_TankDrive driveBase;
+  
   private Supplier<Double> leftYAxisSpeedSupplier;
   private Supplier<Double> rightZAxisRotateSupplier;
 
-  /** Creates a new C_FTC. */
   public C_Drive(SS_TankDrive driveBase,
                 Supplier<Double> leftYAxisSpeedSupplier,
                 Supplier<Double> rightZAxisRotateSupplier) {

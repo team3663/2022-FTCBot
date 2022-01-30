@@ -16,7 +16,7 @@ public final class Constants {
     public static final int L_DRIVE_CAN_ID = 3;
     public static final int R_DRIVE_CAN_ID = 4;
 
-    public static final int Xbox_Driver_Controller = 0;
+    public static final int XBOX_DRIVER_CONTROLLER_ID = 0;
 
     public static final int L_X_AXIS = 0;
     public static final int L_Y_AXIS = 1;
