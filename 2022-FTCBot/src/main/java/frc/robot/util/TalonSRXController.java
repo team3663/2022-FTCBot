@@ -25,13 +25,13 @@ public class TalonSRXController extends TalonSRX implements MotorController {
         super.set(ControlMode.PercentOutput, speed);
     }
 
-    public void setInverted(boolean inverted) {
-        this.inverted = inverted;
-    }
-
-    public boolean getInverted() {
-        return inverted;
-    }
+    // Don't need this section as setInverted() already exist
+    // public void setInverted(boolean inverted) {
+    //     this.inverted = inverted;
+    // }
+    // public boolean getInverted() {
+    //     return inverted;
+    // }
 
     @Override
     public double get() {

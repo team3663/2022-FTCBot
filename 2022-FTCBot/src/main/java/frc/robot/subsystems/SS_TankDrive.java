@@ -6,26 +6,30 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+// import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.util.TalonSRXController;
 
 public class SS_TankDrive extends SubsystemBase {
-
-  // private final MotorController leftMotor = new TalonSRX(Constants.LEFT_DRIVE);
-  // private final MotorController rightMotor = new TalonSRX(Constants.RIGHT_DRIVE);
-
-  private final TalonSRXController leftMotor = new TalonSRXController(Constants.LEFT_DRIVE_CAN_ID);
-  private final TalonSRXController rightMotor = new TalonSRXController(Constants.RIGHT_DRIVE_CAN_ID);
+  // Set up the drive motor controlles
+  private final TalonSRXController m_leftDriveMotor = new TalonSRXController(Constants.L_DRIVE_CAN_ID);
+  private final TalonSRXController m_rightDriveMotor = new TalonSRXController(Constants.R_DRIVE_CAN_ID);
 
   // Set up the differential drive controller
-  private final DifferentialDrive m_diffDrive = new DifferentialDrive(leftMotor, rightMotor);
+  private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftDriveMotor, m_rightDriveMotor);
+
+  // set up the encoders for the drive motor controllers  
+  // private Encoder m_leftDriveEncoder = new Encoder(1, 2);  // FIXME: need actual encoder parameters
+  // private Encoder m_rightDriveEncoder = new Encoder(3, 4); // FIXME: need actual encoder parameters
 
   /** Creates a new SS_FTC. */
   public SS_TankDrive() {
-    leftMotor.setInverted(false);
-    rightMotor.setInverted(true);
+    m_leftDriveMotor.setInverted(false);
+    m_rightDriveMotor.setInverted(true);
+    // m_leftDriveEncoder.setReverseDirection(false); // FIXME: need actual encoder parameters
+    // m_rightDriveEncoder.setReverseDirection(true); // FIXME: need actual encoder parameters
   }
 
   public void arcadeDrive(double xAxisSpeed, double zAxisRotate) {
@@ -38,7 +42,7 @@ public class SS_TankDrive extends SubsystemBase {
   }
 
   public void setPower(double leftPower, double rightPower) {
-    leftMotor.set(ControlMode.PercentOutput, leftPower);
-    rightMotor.set(ControlMode.PercentOutput, rightPower);
+    m_leftDriveMotor.set(ControlMode.PercentOutput, leftPower);
+    m_rightDriveMotor.set(ControlMode.PercentOutput, rightPower);
   }
 }

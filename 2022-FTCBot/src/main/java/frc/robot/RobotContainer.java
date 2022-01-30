@@ -32,18 +32,15 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private SS_TankDrive driveBase;
-  private Command c_Drive;
+  private final SS_TankDrive ss_driveBase = new SS_TankDrive();;
+  private final Command c_Drive = new C_Drive(ss_driveBase,
+                              () -> driverController.getRawAxis(Constants.L_Y_AXIS),
+                              () -> driverController.getRawAxis(Constants.R_X_AXIS)
+                            );
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    SS_TankDrive driveBase = new SS_TankDrive();
-    Command c_Drive = new C_Drive(driveBase,
-                            () -> driverController.getRawAxis(Constants.L_Y_AXIS),
-                            () -> driverController.getRawAxis(Constants.R_X_AXIS)
-                        );
-    driveBase.setDefaultCommand(c_Drive);
-
+    ss_driveBase.setDefaultCommand(c_Drive);
     // Configure the button bindings
     configureButtonBindings();
   }
