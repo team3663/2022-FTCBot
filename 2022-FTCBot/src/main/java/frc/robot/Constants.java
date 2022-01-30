@@ -13,7 +13,15 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final int LEFT_DRIVE = 3;
-    public static final int RIGHT_DRIVE = 4;
+    public static final int LEFT_DRIVE_CAN_ID = 3;
+    public static final int RIGHT_DRIVE_CAN_ID = 4;
+
     public static final int Xbox_Driver_Controller = 0;
+
+    public static final int L_X_AXIS = 0;
+    public static final int L_Y_AXIS = 1;
+    public static final int L_TRIGGER = 2;
+    public static final int R_TRIGGER = 3;
+    public static final int R_X_AXIS = 4;
+    public static final int R_Y_AXIS = 5;
 }

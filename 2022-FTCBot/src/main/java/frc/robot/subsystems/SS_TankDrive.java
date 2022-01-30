@@ -16,8 +16,8 @@ public class SS_TankDrive extends SubsystemBase {
   // private final MotorController leftMotor = new TalonSRX(Constants.LEFT_DRIVE);
   // private final MotorController rightMotor = new TalonSRX(Constants.RIGHT_DRIVE);
 
-  private final TalonSRXController leftMotor = new TalonSRXController(Constants.LEFT_DRIVE);
-  private final TalonSRXController rightMotor = new TalonSRXController(Constants.RIGHT_DRIVE);
+  private final TalonSRXController leftMotor = new TalonSRXController(Constants.LEFT_DRIVE_CAN_ID);
+  private final TalonSRXController rightMotor = new TalonSRXController(Constants.RIGHT_DRIVE_CAN_ID);
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(leftMotor, rightMotor);

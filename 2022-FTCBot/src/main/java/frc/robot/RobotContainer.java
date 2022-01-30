@@ -27,22 +27,23 @@ import frc.robot.util.XboxGamepad;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  
+
   public static XboxGamepad driverController = new XboxGamepad(Constants.Xbox_Driver_Controller, 0.1);
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private SS_TankDrive driveBase = new SS_TankDrive();
-  private Command cmd = new C_Drive(driveBase, 
-                            () -> driverController.getRawAxis(1), 
-                            () -> driverController.getRawAxis(4)
-                        );
+  private SS_TankDrive driveBase;
+  private Command c_Drive;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
-    driveBase.setDefaultCommand(cmd);
-    
+    SS_TankDrive driveBase = new SS_TankDrive();
+    Command c_Drive = new C_Drive(driveBase,
+                            () -> driverController.getRawAxis(Constants.L_Y_AXIS),
+                            () -> driverController.getRawAxis(Constants.R_X_AXIS)
+                        );
+    driveBase.setDefaultCommand(c_Drive);
+
     // Configure the button bindings
     configureButtonBindings();
   }
