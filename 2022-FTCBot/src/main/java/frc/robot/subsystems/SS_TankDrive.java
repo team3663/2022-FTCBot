@@ -27,9 +27,9 @@ public class SS_TankDrive extends SubsystemBase {
     leftMotor.setInverted(false);
     rightMotor.setInverted(true);
   }
-  
+
   public void arcadeDrive(double xAxisSpeed, double zAxisRotate) {
-    m_diffDrive.arcadeDrive(xAxisSpeed, zAxisRotate);
+    m_diffDrive.arcadeDrive(xAxisSpeed, -zAxisRotate);
   }
 
   @Override
