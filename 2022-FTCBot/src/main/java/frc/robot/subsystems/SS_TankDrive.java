@@ -9,13 +9,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 // import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.*;
 import frc.robot.utils.TalonSRXController;
 
 public class SS_TankDrive extends SubsystemBase {
   // Set up the drive motor controlles
-  private final TalonSRXController m_leftDriveMotor = new TalonSRXController(Constants.L_DRIVE_CAN_ID);
-  private final TalonSRXController m_rightDriveMotor = new TalonSRXController(Constants.R_DRIVE_CAN_ID);
+  private final TalonSRXController m_leftDriveMotor = new TalonSRXController(CANConstants.L_MOTOR_CONTROLLER_CAN_ID);
+  private final TalonSRXController m_rightDriveMotor = new TalonSRXController(CANConstants.R_MOTOR_CONTROLLER_CAN_ID);
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftDriveMotor, m_rightDriveMotor);

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.C_AutoTimeStraightLeft;
 import frc.robot.commands.C_AutoTimeStraightRight;
 import frc.robot.commands.C_Drive;
+import frc.robot.Constants.*;
 import frc.robot.subsystems.SS_TankDrive;
 import frc.robot.utils.XboxGamepad;
 
@@ -32,14 +33,15 @@ import frc.robot.utils.XboxGamepad;
  */
 public class RobotContainer {
   // Setup Driver Controller
-  public static XboxGamepad driverController = new XboxGamepad(Constants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
+  public static XboxGamepad driverController = new XboxGamepad(OIConstants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final SS_TankDrive ss_driveBase = new SS_TankDrive();;
+
   private final Command c_Drive = new C_Drive(ss_driveBase,
-                              () -> driverController.getRawAxis(Constants.L_Y_AXIS),
-                              () -> driverController.getRawAxis(Constants.R_X_AXIS)
+                              () -> driverController.getRawAxis(OIConstants.L_Y_AXIS),
+                              () -> driverController.getRawAxis(OIConstants.R_X_AXIS)
                             );
 
   // Create SmartDashboard chooser for autonomous routines
