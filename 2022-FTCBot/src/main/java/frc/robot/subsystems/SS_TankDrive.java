@@ -36,13 +36,13 @@ public class SS_TankDrive extends SubsystemBase {
     m_diffDrive.arcadeDrive(xAxisSpeed, -zAxisRotate);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
   public void setPower(double leftPower, double rightPower) {
     m_leftDriveMotor.set(ControlMode.PercentOutput, leftPower);
     m_rightDriveMotor.set(ControlMode.PercentOutput, rightPower);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
   }
 }

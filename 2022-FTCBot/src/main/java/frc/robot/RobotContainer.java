@@ -4,10 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.C_AutoTimeStraightLeft;
+import frc.robot.commands.C_AutoTimeStraightRight;
 import frc.robot.commands.C_Drive;
 import frc.robot.subsystems.SS_TankDrive;
 import frc.robot.utils.XboxGamepad;
@@ -38,9 +42,21 @@ public class RobotContainer {
                               () -> driverController.getRawAxis(Constants.R_X_AXIS)
                             );
 
+  // Create SmartDashboard chooser for autonomous routines
+  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // set default commands for all subsystems
     ss_driveBase.setDefaultCommand(c_Drive);
+
+    // set up SmartDashboard options for autonomous modes
+    // Setup SmartDashboard options
+    m_chooser.setDefaultOption("Auto Routine Time: Straight-Left", new C_AutoTimeStraightLeft(ss_driveBase));
+    m_chooser.setDefaultOption("Auto Routine Time: Straight-Right", new C_AutoTimeStraightRight(ss_driveBase));
+
+    SmartDashboard.putData(m_chooser);
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -60,6 +76,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    // return null;
+    return m_chooser.getSelected();
   }
 }
