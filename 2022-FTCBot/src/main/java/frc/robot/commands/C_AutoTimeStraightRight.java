@@ -19,8 +19,8 @@ public class C_AutoTimeStraightRight extends SequentialCommandGroup {
    */
   public C_AutoTimeStraightRight(SS_TankDrive ss_driveBase) {
     addCommands(
-      new C_DriveTimeSpeedRotation(ss_driveBase, -2, 0, 3.0),
-      new C_DriveTimeSpeedRotation(ss_driveBase, -2, 1, 3.0)
+      new C_DriveTimeSpeedRotation(ss_driveBase, 2, 0, 3.0),
+      new C_DriveTimeSpeedRotation(ss_driveBase, 2, 1, 3.0)
     );
   }
 }

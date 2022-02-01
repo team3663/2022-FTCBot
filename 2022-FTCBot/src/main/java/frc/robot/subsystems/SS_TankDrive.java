@@ -26,8 +26,8 @@ public class SS_TankDrive extends SubsystemBase {
 
   /** Creates a new SS_FTC. */
   public SS_TankDrive() {
-    m_leftDriveMotor.setInverted(false);
-    m_rightDriveMotor.setInverted(true);
+    m_leftDriveMotor.setInverted(true);
+    m_rightDriveMotor.setInverted(false);
     // m_leftDriveEncoder.setReverseDirection(false); // FIXME: need actual encoder parameters
     // m_rightDriveEncoder.setReverseDirection(true); // FIXME: need actual encoder parameters
   }
