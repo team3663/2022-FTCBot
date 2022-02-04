@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -12,6 +13,7 @@ import frc.robot.subsystems.SS_TankDrive;
 public class C_AutoAlign extends CommandBase {
   private SS_TankDrive driveBase;
   private Limelight vision;
+  // private int m_startTimeMS = (int) (Timer.getFPGATimestamp() * 1000);
   
   private boolean m_printOnceAlready = false;
 
@@ -33,7 +35,7 @@ public class C_AutoAlign extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveBase.arcadeDrive(0.0, 0.5);
+    // driveBase.arcadeDrive(0.0, 0.5);
     // System.out.println("----------------------!vision.getValidTarget(): " + !vision.getValidTarget());
     // if(vision == null && !vision.getValidTarget()){
        //driveBase.setPower("left", 0.2);
@@ -47,15 +49,17 @@ public class C_AutoAlign extends CommandBase {
     //while not vertical back up if yoffset is < 20.5 && > 0 else drive foreward
     // System.out.println("oooooooooooo>>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
     // driveBase.arcadeDrive(0, 0.2);
-    // if(vision.getValidTarget()){
-      // driveBase.arcadeDrive(0, -0.2);
-      // System.out.println("oooooooooooo>>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
+    if(!vision.getValidTarget()){
+      driveBase.arcadeDrive(0, 0.5);
+      System.out.println(">>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
+      System.out.println("Timer.getFPGATimestamp() : " + (int) (Timer.getFPGATimestamp() * 1000));
+      System.out.println("getXOffset(): " + vision.getXOffset() + "  getYOffset(): " + vision.getYOffset());
     //   if(vision.getXOffset() < 27 && vision.getXOffset() > 2){
     //     driveBase.setPower(0.2, -0.2);
     //  }//else if(vision.getXOffset() > -27 && vision.getYOffset() < -2){
       //   driveBase.setPower("right", -0.2);
       // }
-    // }
+    } 
   }
 
   // Called once the command ends or is interrupted.
