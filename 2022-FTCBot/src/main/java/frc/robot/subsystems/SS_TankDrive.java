@@ -7,18 +7,22 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 // import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+// import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
-import frc.robot.utils.TalonSRXController;
+// import frc.robot.utils.TalonSRXController;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class SS_TankDrive extends SubsystemBase {
   // Set up the drive motor controlles
-  private final TalonSRXController m_leftDriveMotor = new TalonSRXController(CANConstants.L_MOTOR_CONTROLLER_CAN_ID);
-  private final TalonSRXController m_rightDriveMotor = new TalonSRXController(CANConstants.R_MOTOR_CONTROLLER_CAN_ID);
+  private final TalonSRX m_leftDriveMotor = new TalonSRX(CANConstants.L_MOTOR_CONTROLLER_CAN_ID);
+  private final TalonSRX m_rightDriveMotor = new TalonSRX(CANConstants.R_MOTOR_CONTROLLER_CAN_ID);
+  // private final TalonSRXController m_leftDriveMotor = new TalonSRXController(CANConstants.L_MOTOR_CONTROLLER_CAN_ID);
+  // private final TalonSRXController m_rightDriveMotor = new TalonSRXController(CANConstants.R_MOTOR_CONTROLLER_CAN_ID);
 
   // Set up the differential drive controller
-  private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftDriveMotor, m_rightDriveMotor);
+  // private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftDriveMotor, m_rightDriveMotor);
 
   // set up the encoders for the drive motor controllers  
   // private final Encoder m_leftDriveEncoder = new Encoder(1, 2);  // FIXME: need actual encoder parameters
@@ -32,8 +36,14 @@ public class SS_TankDrive extends SubsystemBase {
     // m_rightDriveEncoder.setReverseDirection(true); // FIXME: need actual encoder parameters
   }
 
-  public void arcadeDrive(double xAxisSpeed, double zAxisRotate) {
-    m_diffDrive.arcadeDrive(xAxisSpeed, -zAxisRotate);
+  public void arcadeDrive(double speed, double rotate) {
+    // NOT using edu.wpi.first.wpilibj.drive.DifferentialDrive;
+    double left = speed + rotate;
+    double right = speed - rotate;
+    setPower(left, right);
+
+    // if you are using edu.wpi.first.wpilibj.drive.DifferentialDrive;
+    // m_diffDrive.arcadeDrive(xAxisSpeed, -zAxisRotate);
   }
 
   public void setPower(double leftPower, double rightPower) {

@@ -10,12 +10,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.commands.C_AutoTimeStraightLeft;
-import frc.robot.commands.C_AutoTimeStraightRight;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.C_AutoAlign;
+import frc.robot.commands.CG_AutoTimeStraightLeft;
+import frc.robot.commands.CG_AutoTimeStraightRight;
 import frc.robot.commands.C_Drive;
 import frc.robot.Constants.*;
 import frc.robot.subsystems.SS_TankDrive;
 import frc.robot.utils.XboxGamepad;
+import frc.robot.drivers.Limelight;
 
 // import edu.wpi.first.wpilibj.GenericHID;
 // import edu.wpi.first.wpilibj.XboxController;
@@ -32,12 +35,15 @@ import frc.robot.utils.XboxGamepad;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  // Get Limelight
+  public static final Limelight limeLight = Limelight.getInstance();
+
   // Setup Driver Controller
   public static XboxGamepad driverController = new XboxGamepad(OIConstants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final SS_TankDrive ss_driveBase = new SS_TankDrive();;
+  private final SS_TankDrive ss_driveBase = new SS_TankDrive();
 
   private final Command c_Drive = new C_Drive(ss_driveBase,
                               () -> driverController.getRawAxis(OIConstants.L_Y_AXIS),
@@ -54,8 +60,8 @@ public class RobotContainer {
 
     // set up SmartDashboard options for autonomous modes
     // Setup SmartDashboard options
-    m_chooser.setDefaultOption("Auto Routine Time: Straight-Left", new C_AutoTimeStraightLeft(ss_driveBase));
-    m_chooser.setDefaultOption("Auto Routine Time: Straight-Right", new C_AutoTimeStraightRight(ss_driveBase));
+    m_chooser.setDefaultOption("Auto Routine Time: Straight-Left", new CG_AutoTimeStraightLeft(ss_driveBase));
+    m_chooser.setDefaultOption("Auto Routine Time: Straight-Right", new CG_AutoTimeStraightRight(ss_driveBase));
 
     SmartDashboard.putData(m_chooser);
 
@@ -69,7 +75,16 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(driverController, OIConstants.A_BUTTON)
+            .whenHeld(new C_AutoAlign(ss_driveBase), true);
+    // new JoystickButton(driverController, OIConstants.A_BUTTON)
+    //         .whileActiveOnce(new C_AutoAlign(ss_driveBase), true);
+    new JoystickButton(driverController, OIConstants.B_BUTTON)
+            .whileActiveOnce(new CG_AutoTimeStraightLeft(ss_driveBase), true);
+    // new JoystickButton(driverController, OIConstants.B_BUTTON)
+    //         .whenPressed(new CG_AutoTimeStraightLeft(ss_driveBase), true);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
