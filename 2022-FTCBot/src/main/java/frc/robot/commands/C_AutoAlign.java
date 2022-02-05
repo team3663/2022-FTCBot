@@ -41,25 +41,24 @@ public class C_AutoAlign extends CommandBase {
        //driveBase.setPower("left", 0.2);
       //driveBase.arcadeDrive(0., -.2);
     // }
-    // if(!vision.getValidTarget()){
-    //   driveBase.setPower("left", 0.2);
-    // }
+    if(vision.getValidTarget()){
+      if(vision.getXOffset() < 27 && vision.getXOffset() > 2){
+        driveBase.arcadeDrive(0, 0.5);
+      } else if(vision.getXOffset() > -27 && vision.getYOffset() < -2){
+        driveBase.arcadeDrive(0, -0.5);
+      }
+    }
     //driveBase.setPower("left", 0.2);
     //while not horozontal turn right if xoffset is < 27 && > 0 else turn left
     //while not vertical back up if yoffset is < 20.5 && > 0 else drive foreward
     // System.out.println("oooooooooooo>>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
     // driveBase.arcadeDrive(0, 0.2);
-    if(!vision.getValidTarget()){
-      driveBase.arcadeDrive(0, 0.5);
-      System.out.println(">>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
-      System.out.println("Timer.getFPGATimestamp() : " + (int) (Timer.getFPGATimestamp() * 1000));
-      System.out.println("getXOffset(): " + vision.getXOffset() + "  getYOffset(): " + vision.getYOffset());
-    //   if(vision.getXOffset() < 27 && vision.getXOffset() > 2){
-    //     driveBase.setPower(0.2, -0.2);
-    //  }//else if(vision.getXOffset() > -27 && vision.getYOffset() < -2){
-      //   driveBase.setPower("right", -0.2);
-      // }
-    } 
+    // if(!vision.getValidTarget()){
+    //   driveBase.arcadeDrive(0, 0.5);
+    //   System.out.println(">>>>>>>>>>> vision.getValidTarget() : " + vision.getValidTarget());
+    //   System.out.println("Timer.getFPGATimestamp() : " + (int) (Timer.getFPGATimestamp() * 1000));
+    //   System.out.println("getXOffset(): " + vision.getXOffset() + "  getYOffset(): " + vision.getYOffset()); 
+    // }
   }
 
   // Called once the command ends or is interrupted.

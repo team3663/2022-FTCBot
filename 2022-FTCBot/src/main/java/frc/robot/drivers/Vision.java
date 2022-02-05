@@ -43,7 +43,7 @@ public class Vision {
   private NetworkTableEntry camtran; //Results of a 3D position solution, 6 numbers: Translation (x,y,y) Rotation(pitch,yaw,roll)
   
   public Vision() {
-    visionTable = NetworkTableInstance.getDefault().getTable("limelight-testing");
+    visionTable = NetworkTableInstance.getDefault().getTable("limelight");
     tx = visionTable.getEntry("tx");
     ty = visionTable.getEntry("ty");
     tv = visionTable.getEntry("tv");

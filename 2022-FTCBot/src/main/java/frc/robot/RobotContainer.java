@@ -19,6 +19,7 @@ import frc.robot.Constants.*;
 import frc.robot.subsystems.SS_TankDrive;
 import frc.robot.utils.XboxGamepad;
 import frc.robot.drivers.Limelight;
+import frc.robot.drivers.Vision;
 
 // import edu.wpi.first.wpilibj.GenericHID;
 // import edu.wpi.first.wpilibj.XboxController;
@@ -36,7 +37,9 @@ import frc.robot.drivers.Limelight;
  */
 public class RobotContainer {
   // Get Limelight
-  public static final Limelight limeLight = Limelight.getInstance();
+  // public static final Limelight limeLight = Limelight.getInstance();
+  // Get Vision (Limelight) 
+  private static final Vision vision = new Vision();
 
   // Setup Driver Controller
   public static XboxGamepad driverController = new XboxGamepad(OIConstants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
@@ -44,7 +47,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final SS_TankDrive ss_driveBase = new SS_TankDrive();
-
+  private final Command c_AutoAlign = new C_AutoAlign(ss_driveBase);
   private final Command c_Drive = new C_Drive(ss_driveBase,
                               () -> driverController.getRawAxis(OIConstants.L_Y_AXIS),
                               () -> driverController.getRawAxis(OIConstants.R_X_AXIS)
@@ -56,7 +59,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // set default commands for all subsystems
-    ss_driveBase.setDefaultCommand(c_Drive);
+    // ss_driveBase.setDefaultCommand(c_Drive);
+    ss_driveBase.setDefaultCommand(c_AutoAlign);
 
     // set up SmartDashboard options for autonomous modes
     // Setup SmartDashboard options
@@ -95,5 +99,9 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     // return null;
     return m_chooser.getSelected();
+  }
+
+  public static Vision getVision() {
+    return vision;
   }
 }
