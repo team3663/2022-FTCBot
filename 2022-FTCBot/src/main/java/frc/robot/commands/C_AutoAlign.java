@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import org.ejml.interfaces.decomposition.LUSparseDecomposition;
+
 import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -30,6 +32,7 @@ public class C_AutoAlign extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    vision.setLEDMode(vision.LED_ON);
     System.out.println("C_AutoAlign started.");
   }
 

@@ -59,8 +59,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // set default commands for all subsystems
-    // ss_driveBase.setDefaultCommand(c_Drive);
-    ss_driveBase.setDefaultCommand(c_AutoAlign);
+    ss_driveBase.setDefaultCommand(c_Drive);
+    // ss_driveBase.setDefaultCommand(c_AutoAlign);
 
     // set up SmartDashboard options for autonomous modes
     // Setup SmartDashboard options
