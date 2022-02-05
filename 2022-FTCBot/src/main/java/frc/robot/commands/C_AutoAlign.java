@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.drivers.Limelight;
+import frc.robot.drivers.Vision;
+// import frc.robot.drivers.Limelight;
 import frc.robot.subsystems.SS_TankDrive;
 
 public class C_AutoAlign extends CommandBase {
   private SS_TankDrive driveBase;
-  private Limelight vision;
+  private Vision vision;
   // private int m_startTimeMS = (int) (Timer.getFPGATimestamp() * 1000);
   
   private boolean m_printOnceAlready = false;
@@ -20,7 +21,7 @@ public class C_AutoAlign extends CommandBase {
   /** Creates a new C_AutoAlign. */
   public C_AutoAlign(SS_TankDrive driveBase) {
     // vision = new Limelight();
-    vision = RobotContainer.limeLight;
+    vision = RobotContainer.getVision();
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveBase = driveBase;
     addRequirements(driveBase);
