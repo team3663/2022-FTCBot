@@ -80,14 +80,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(driverController, OIConstants.A_BUTTON)
-            .whenHeld(new C_AutoAlign(ss_driveBase), true);
-    // new JoystickButton(driverController, OIConstants.A_BUTTON)
-    //         .whileActiveOnce(new C_AutoAlign(ss_driveBase), true);
-    new JoystickButton(driverController, OIConstants.B_BUTTON)
-            .whileActiveOnce(new CG_AutoTimeStraightLeft(ss_driveBase), true);
-    // new JoystickButton(driverController, OIConstants.B_BUTTON)
-    //         .whenPressed(new CG_AutoTimeStraightLeft(ss_driveBase), true);
+    // new JoystickButton(driverController, OIConstants.A_BUTTON).whileActiveOnce(new C_AutoAlign(ss_driveBase), true);
+    new Button(driverController::getAButton).whenHeld(new C_AutoAlign(ss_driveBase), true);
+    
+    new JoystickButton(driverController, OIConstants.B_BUTTON).whileActiveOnce(new CG_AutoTimeStraightLeft(ss_driveBase), true);
+    // new JoystickButton(driverController, OIConstants.B_BUTTON).whenPressed(new CG_AutoTimeStraightLeft(ss_driveBase), true);
   }
 
   /**
