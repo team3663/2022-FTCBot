@@ -16,16 +16,11 @@ import frc.robot.subsystems.SS_TankDrive;
 public class C_AutoAlign extends CommandBase {
   private SS_TankDrive driveBase;
   private Vision vision;
-  // private int m_startTimeMS = (int) (Timer.getFPGATimestamp() * 1000);
-  
-  private boolean m_printOnceAlready = false;
 
-  /** Creates a new C_AutoAlign. */
   public C_AutoAlign(SS_TankDrive driveBase) {
-    // vision = new Limelight();
     vision = RobotContainer.getVision();
-    // Use addRequirements() here to declare subsystem dependencies.
     this.driveBase = driveBase;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveBase);
   }
 
@@ -51,6 +46,7 @@ public class C_AutoAlign extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    vision.setLEDMode(vision.LED_OFF); // TODO: Should LED be turned OFF when done or left ON???
     driveBase.arcadeDrive(0, 0);
     System.out.println("C_AutoAlign ended.");
   }
@@ -58,6 +54,7 @@ public class C_AutoAlign extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // command finishes when target is in the 'cross-hair'
     return vision.getXOffset() < 2 && vision.getXOffset() > -2;
   }
 }

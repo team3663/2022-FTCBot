@@ -53,7 +53,7 @@ public class Limelight {
   private NetworkTableEntry camtran; //Results of a 3D position solution, 6 numbers: Translation (x,y,y) Rotation(pitch,yaw,roll)
   
   private Limelight() {
-    visionTable = NetworkTableInstance.getDefault().getTable("limelight-testing");
+    visionTable = NetworkTableInstance.getDefault().getTable("limelight");
     tx = visionTable.getEntry("tx");
     ty = visionTable.getEntry("ty");
     tv = visionTable.getEntry("tv");
