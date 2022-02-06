@@ -40,9 +40,9 @@ public class C_AutoAlign extends CommandBase {
   @Override
   public void execute() {
     if(vision.getValidTarget()){
-      if(vision.getXOffset() < 27 && vision.getXOffset() > 2){
+      if(vision.getXOffset() > 2 && vision.getXOffset() < 27){
         driveBase.arcadeDrive(0, 0.5);
-      } else if(vision.getXOffset() > -27 && vision.getYOffset() < -2){
+      } else if(vision.getXOffset() < -2 && vision.getXOffset() > -27){
         driveBase.arcadeDrive(0, -0.5);
       }
     }
@@ -58,6 +58,6 @@ public class C_AutoAlign extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return vision.getXOffset() < 2 && vision.getXOffset() > -2;
   }
 }
