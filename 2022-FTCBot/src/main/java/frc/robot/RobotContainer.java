@@ -15,6 +15,7 @@ import frc.robot.commands.C_AutoAlign;
 import frc.robot.commands.CG_AutoTimeStraightLeft;
 import frc.robot.commands.CG_AutoTimeStraightRight;
 import frc.robot.commands.C_Drive;
+import frc.robot.commands.C_PositionBot;
 import frc.robot.Constants.*;
 import frc.robot.subsystems.SS_TankDrive;
 import frc.robot.utils.XboxGamepad;
@@ -46,7 +47,12 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  // Subsystems
   private final SS_TankDrive ss_driveBase = new SS_TankDrive();
+
+  // Commands
+  private final Command c_PositionBot = new C_PositionBot(ss_driveBase);
   private final Command c_AutoAlign = new C_AutoAlign(ss_driveBase);
   private final Command c_Drive = new C_Drive(ss_driveBase,
                               () -> driverController.getRawAxis(OIConstants.L_Y_AXIS),
@@ -60,7 +66,7 @@ public class RobotContainer {
   public RobotContainer() {
     // set default commands for all subsystems
     ss_driveBase.setDefaultCommand(c_Drive);
-    // ss_driveBase.setDefaultCommand(c_AutoAlign);
+    //ss_driveBase.setDefaultCommand(c_AutoAlign);
 
     // set up SmartDashboard options for autonomous modes
     // Setup SmartDashboard options
@@ -81,10 +87,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // new JoystickButton(driverController, OIConstants.A_BUTTON).whileActiveOnce(new C_AutoAlign(ss_driveBase), true);
-    new Button(driverController::getAButton).whenHeld(new C_AutoAlign(ss_driveBase), true);
+    new Button(driverController::getAButton).whenHeld(c_PositionBot, true);
     
     new JoystickButton(driverController, OIConstants.B_BUTTON).whileActiveOnce(new CG_AutoTimeStraightLeft(ss_driveBase), true);
-    // new JoystickButton(driverController, OIConstants.B_BUTTON).whenPressed(new CG_AutoTimeStraightLeft(ss_driveBase), true);
+    new JoystickButton(driverController, OIConstants.B_BUTTON).whenPressed(new CG_AutoTimeStraightLeft(ss_driveBase), true);
   }
 
   /**
@@ -95,7 +101,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return null;
-    return m_chooser.getSelected();
+    return c_AutoAlign;
   }
 
   public static Vision getVision() {
