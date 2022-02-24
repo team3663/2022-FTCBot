@@ -40,7 +40,7 @@ public class RobotContainer {
   // Get Limelight
   // public static final Limelight limeLight = Limelight.getInstance();
   // Get Vision (Limelight) 
-  private static final Vision vision = new Vision();
+  private static final Vision vision = new Vision(27, 0.43815, 2.6416);
 
   // Setup Driver Controller
   public static XboxGamepad driverController = new XboxGamepad(OIConstants.XBOX_DRIVER_CONTROLLER_ID, 0.1);
@@ -52,7 +52,7 @@ public class RobotContainer {
   private final SS_TankDrive ss_driveBase = new SS_TankDrive();
 
   // Commands
-  private final Command c_PositionBot = new C_PositionBot(ss_driveBase);
+  private final Command c_PositionBot = new C_PositionBot(ss_driveBase, 0);
   private final Command c_AutoAlign = new C_AutoAlign(ss_driveBase);
   private final Command c_Drive = new C_Drive(ss_driveBase,
                               () -> driverController.getRawAxis(OIConstants.L_Y_AXIS),

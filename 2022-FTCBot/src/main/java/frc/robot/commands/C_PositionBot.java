@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.drivers.Vision;
@@ -12,11 +13,14 @@ import frc.robot.subsystems.SS_TankDrive;
 public class C_PositionBot extends CommandBase {
   /** Creates a new C_PositionBot. */
   private SS_TankDrive driveBase;
+  private DigitalInput limitSwitch;
   private Vision vision;
+  private int distance;
 
-  public C_PositionBot(SS_TankDrive driveBase) {
+  public C_PositionBot(SS_TankDrive driveBase, int switchID) {
     vision = RobotContainer.getVision();
     this.driveBase = driveBase;
+    limitSwitch = new DigitalInput(switchID);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveBase);
   }
@@ -26,6 +30,7 @@ public class C_PositionBot extends CommandBase {
   public void initialize() {
     vision.setLEDMode(vision.LED_ON);
     System.out.println("C_PositionBot started.");
+    distance = 10;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,15 +42,22 @@ public class C_PositionBot extends CommandBase {
       driveBase.arcadeDrive(0, -0.5);
     }
 
-    if(vision.getYOffset() > 2 && vision.getYOffset() < 20.5){
-      driveBase.arcadeDrive(-0.5, 0);
-    } else if(vision.getYOffset() < -2 && vision.getYOffset() > -20.5){
-      driveBase.arcadeDrive(0.5, 0);
-    }
-
-    if(vision.getYOffset() < 2 && vision.getYOffset() > -2 && vision.getXOffset() < 2 && vision.getXOffset() > -2){
-      driveBase.arcadeDrive(0, 0);
-    }
+    if(vision.getXOffset() < 2 && vision.getXOffset() > -2){
+      if(vision.getDistance() < distance){
+        driveBase.arcadeDrive(-0.5, 0);
+        System.out.print("DISTANCE" + vision.getDistance());
+      } else if(vision.getDistance() > distance){
+        driveBase.arcadeDrive(0.5, 0);
+        System.out.print("DISTANCE" + vision.getDistance());
+      }
+      if(vision.getDistance() == distance){
+        if(vision.getXOffset() > 2 && vision.getXOffset() < 27){
+          driveBase.arcadeDrive(0, 0.5);
+        } else if(vision.getXOffset() < -2 && vision.getXOffset() > -27){
+          driveBase.arcadeDrive(0, -0.5);
+        }
+      }
+    } 
   }
   
 
@@ -62,3 +74,4 @@ public class C_PositionBot extends CommandBase {
     return false;
   }
 }
+

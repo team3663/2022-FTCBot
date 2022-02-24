@@ -16,6 +16,7 @@ import frc.robot.subsystems.SS_TankDrive;
 public class C_AutoAlign extends CommandBase {
   private SS_TankDrive driveBase;
   private Vision vision;
+  private int distance;
 
   public C_AutoAlign(SS_TankDrive driveBase) {
     vision = RobotContainer.getVision();
@@ -28,6 +29,7 @@ public class C_AutoAlign extends CommandBase {
   @Override
   public void initialize() {
     vision.setLEDMode(vision.LED_ON);
+    distance = 10;
     System.out.println("C_AutoAlign started.");
   }
 
